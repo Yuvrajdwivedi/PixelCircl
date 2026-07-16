@@ -1,0 +1,26 @@
+{
+  "name": "pixelplaza-metaverse",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "PixelPlaza \u2014 a Zep-style 2D metaverse. Monorepo: HTTP API + WebSocket server + web client.",
+  "engines": {
+    "node": ">=20"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n http,ws,web -c yellow,magenta,cyan \"npm run dev -w apps/http\" \"npm run dev -w apps/ws\" \"npm run dev -w apps/frontend\"",
+    "build": "npm run build -w apps/frontend",
+    "start": "node server.js",
+    "serve": "npm run build && node server.js",
+    "test:e2e": "node tests/e2e.js",
+    "test:browser": "node tests/browser.mjs"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "playwright-core": "^1.61.1"
+  }
+}
